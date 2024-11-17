@@ -20,7 +20,7 @@ builder.Services.AddDbContext<DataBase>(options => options.UseSqlServer(connecti
 
 var app = builder.Build();
 
-app.MapGet("api/users", async (DataBase db) =>  await db.Users.ToListAsync());
+app.MapGet("api/users", async (DataBase db) => Results.Json(db.Users));
 
 app.MapGet("api/users/{id:int}", async(int id, DataBase db) =>
 {
@@ -105,8 +105,7 @@ app.MapPost("data/files", async(HttpContext context) =>           //this is for 
     }
 
     return $"Data of user {username}: {email} is saved succesfully";
-});
-//app.MapGet("/", );    //it is for getting 
+}); 
 
 app.Run();
 
